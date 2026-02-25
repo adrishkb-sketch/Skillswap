@@ -1,0 +1,64 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #1e1e2f, #2c2c54, #3c40c6, #575fcf);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: white;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    color: #00cec9;
+    transform: translateX(5px);
+}
+
+.card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.5);
+}
+
+.btn {
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.skill-chip {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 4px;
+    background: linear-gradient(45deg,#6c5ce7,#00cec9);
+    border-radius: 50px;
+    font-size: 12px;
+}

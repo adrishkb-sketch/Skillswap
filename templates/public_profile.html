@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<!-- ANALYTICS -->
+<div class="card p-4 mb-4">
+    <h4>Analytics</h4>
+    <canvas id="creditChart"></canvas>
+</div>
+
+<script>
+const ctx = document.getElementById('creditChart');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Credits', 'Karma'],
+        datasets: [{
+            label: 'Stats',
+            data: [{{ user.credits }}, {{ user.karma }}],
+            backgroundColor: ['#6c5ce7','#00cec9']
+        }]
+    }
+});
+</script>
+
+
+<div class="row g-4">
+
+    <!-- PROFILE SECTION -->
+    <div class="col-lg-4">
+
+        <div class="card p-4 text-center shadow-lg">
+
+            {% if user.profile_pic %}
+                <img src="/{{ user.profile_pic }}" width="140"
+                     class="rounded-circle mb-3 shadow">
+            {% endif %}
+
+            <h4 class="fw-bold">{{ user.full_name }}</h4>
+            <p class="opacity-75">{{ user.bio }}</p>
+
+            <div class="mt-3">
+                {% if user.skills_teach %}
+                    {% for skill in user.skills_teach.split(',') %}
+                        <span class="skill-chip">{{ skill.strip() }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <hr>
+
+            <p><strong>Credits:</strong> {{ user.credits }}</p>
+            <p><strong>Karma:</strong> {{ user.karma }}</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FEED SECTION -->
+    <div class="col-lg-8">
+
+        <div class="card p-4 shadow-lg mb-4">
+            <h4 class="mb-3">Recommended For You</h4>
+
+            {% if courses %}
+                {% for course in courses %}
+                    <div class="card p-3 mb-3">
+
+                        {% if course.thumbnail_path %}
+                            <img src="/{{ course.thumbnail_path }}"
+                                 class="img-fluid rounded mb-3">
+                        {% endif %}
+
+                        <h5 class="fw-bold">{{ course.title }}</h5>
+                        <p class="opacity-75">{{ course.description }}</p>
+
+                        <div class="d-flex justify-content-between">
+                            <small>{{ course.duration }} mins</small>
+                            <small>{{ course.credits_required }} credits</small>
+                        </div>
+
+                        <div class="mt-3">
+                            <a href="/enroll/{{ course.id }}" class="btn btn-success btn-sm">
+                                Enroll
+                            </a>
+
+                            <a href="/user/{{ course.instructor_id }}"
+                               class="btn btn-outline-light btn-sm ms-2">
+                                Instructor
+                            </a>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No matching courses yet.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

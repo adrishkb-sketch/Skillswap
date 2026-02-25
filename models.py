@@ -42,7 +42,7 @@ class Course(db.Model):
     document_path = db.Column(db.String(300))
 
     instructor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
+    thumbnail_path = db.Column(db.String(300))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     reviews = db.relationship('Review', backref='course', lazy=True)
 

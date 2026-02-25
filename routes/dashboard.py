@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-
+from models import User
 dashboard_bp = Blueprint('dashboard', __name__)
 
 
@@ -56,3 +56,10 @@ def transactions():
     ).order_by(CreditTransaction.timestamp.desc()).all()
 
     return render_template("transactions.html", transactions=user_transactions)
+
+@dashboard_bp.route("/leaderboard")
+@login_required
+def leaderboard():
+    users = User.query.order_by(User.credits.desc()).limit(10).all()
+    return render_template("leaderboard.html", users=users)
+

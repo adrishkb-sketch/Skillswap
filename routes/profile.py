@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from extensions import db
 profile_bp = Blueprint('profile', __name__)
-
+from models import User, Course
 import os
 from werkzeug.utils import secure_filename
 
@@ -53,3 +53,9 @@ def edit_profile():
         return redirect(url_for("dashboard.dashboard_home"))
 
     return render_template("complete_profile.html")
+
+@profile_bp.route("/user/<int:user_id>")
+def public_profile(user_id):
+    user = User.query.get_or_404(user_id)
+    courses = Course.query.filter_by(instructor_id=user.id).all()
+    return render_template("public_profile.html", user=user, courses=courses)

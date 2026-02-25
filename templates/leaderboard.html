@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-4">
+<h2>Leaderboard</h2>
+{% for user in users %}
+<div class="card p-3 mb-2">
+{{ loop.index }}. {{ user.full_name }} - {{ user.credits }} credits
+</div>
+{% endfor %}
+</div>
+{% endblock %}

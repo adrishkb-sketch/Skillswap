@@ -1,9 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to SkillSwap</h1>
-<p>Exchange skills using credits. No direct money exchange.</p>
 
-<a href="/register" class="btn btn-primary">Register</a>
-<a href="/login" class="btn btn-dark">Login</a>
+<div class="text-center mt-5">
+
+    <h1 class="display-4 fw-bold mb-3">
+        Exchange Skills. Earn Credits.
+    </h1>
+
+    <p class="lead mb-4">
+        Learn anything. Teach what you know.
+        A skill-powered economy for students.
+    </p>
+
+    <a href="/register" class="btn btn-primary btn-lg me-3">
+        Get Started
+    </a>
+
+    <a href="/login" class="btn btn-outline-light btn-lg">
+        Login
+    </a>
+
+</div>
+
 {% endblock %}
