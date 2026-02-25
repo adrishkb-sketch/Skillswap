@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <!-- LEFT PROFILE COLUMN -->
+    <div class="col-md-4">
+        <div class="card shadow p-4 text-center">
+
+            {% if user.profile_pic %}
+                <img src="/{{ user.profile_pic }}" width="150" class="rounded-circle mb-3">
+            {% endif %}
+
+            <h4>{{ user.full_name }}</h4>
+            <p class="text-muted">{{ user.bio }}</p>
+
+            <hr>
+
+            <p><strong>Credits:</strong> {{ user.credits }}</p>
+            <p><strong>Karma:</strong> {{ user.karma }}</p>
+
+            <hr>
+
+            <a href="/edit-profile" class="btn btn-secondary w-100 mb-2">
+                Edit Profile
+            </a>
+
+            <a href="/create-course" class="btn btn-primary w-100 mb-2">
+                Create Course
+            </a>
+            <a href="/buy-credits" class="btn btn-warning w-100 mb-2">
+    Buy Credits
+</a>
+            <a href="/transactions" class="btn btn-info w-100 mb-2">
+    View Transactions
+</a>
+            <a href="/logout" class="btn btn-danger w-100">
+                Logout
+            </a>
+
+        </div>
+    </div>
+
+
+    <!-- RIGHT CONTENT COLUMN -->
+    <div class="col-md-8">
+
+        <!-- Recommended Feed -->
+        <div class="card shadow p-4 mb-4">
+            <h3>Recommended For You</h3>
+            <hr>
+
+            {% if courses %}
+                {% for course in courses %}
+                    <div class="card p-3 mb-3">
+                        <h5>{{ course.title }}</h5>
+                        <p>{{ course.description }}</p>
+                        <p><strong>Tags:</strong> {{ course.tags }}</p>
+                        <p><strong>Duration:</strong> {{ course.duration }} mins</p>
+                        <p><strong>Credits Required:</strong> {{ course.credits_required }}</p>
+
+                        <a href="/enroll/{{ course.id }}" class="btn btn-success">
+                            Enroll
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No matching courses yet.</p>
+            {% endif %}
+        </div>
+
+
+        <!-- My Created Courses -->
+        <div class="card shadow p-4 mb-4">
+            <h3>My Created Courses</h3>
+            <hr>
+
+            {% if my_courses %}
+                {% for course in my_courses %}
+                    <div class="card p-3 mb-3 bg-light">
+                        <h5>{{ course.title }}</h5>
+                        <p><strong>Credits:</strong> {{ course.credits_required }}</p>
+                        <p><strong>Duration:</strong> {{ course.duration }} mins</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You haven’t created any courses yet.</p>
+            {% endif %}
+        </div>
+
+
+        <!-- My Enrolled Courses -->
+        <div class="card shadow p-4">
+            <h3>My Enrolled Courses</h3>
+            <hr>
+
+            {% if enrolled_courses %}
+                {% for course in enrolled_courses %}
+                    <div class="card p-3 mb-3 bg-light">
+                        <h5>{{ course.title }}</h5>
+                        <p><strong>Credits Paid:</strong> {{ course.credits_required }}</p>
+
+                        <a href="/course/{{ course.id }}" class="btn btn-dark">
+                            View Course
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You have not enrolled in any courses.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

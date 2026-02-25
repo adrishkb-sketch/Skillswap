@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Complete Profile</h2>
+
+<form method="POST">
+    <input type="text" name="full_name" class="form-control mb-3" placeholder="Full Name">
+    <input type="text" name="college" class="form-control mb-3" placeholder="College">
+    <input type="text" name="degree" class="form-control mb-3" placeholder="Degree">
+    <textarea name="bio" class="form-control mb-3" placeholder="Bio"></textarea>
+    <input type="text" name="skills_teach" class="form-control mb-3" placeholder="Skills You Can Teach">
+    <input type="text" name="skills_learn" class="form-control mb-3" placeholder="Skills You Want To Learn">
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+{% endblock %}

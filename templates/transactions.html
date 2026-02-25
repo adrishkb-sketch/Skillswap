@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+    <h2>Transaction History</h2>
+    <hr>
+
+    {% if transactions %}
+        {% for t in transactions %}
+            <div class="card p-2 mb-2">
+                <p>
+                    <strong>{{ t.type }}</strong> |
+                    Amount: {{ t.amount }} |
+                    {{ t.timestamp }}
+                </p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No transactions yet.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

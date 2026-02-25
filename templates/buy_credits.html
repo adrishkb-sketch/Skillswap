@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+    <h2>Buy Credits</h2>
+    <p>This is a demo payment page.</p>
+
+    <form method="POST">
+        <select name="amount" class="form-control mb-3">
+            <option value="50">50 Credits</option>
+            <option value="100">100 Credits</option>
+            <option value="500">500 Credits</option>
+        </select>
+
+        <button class="btn btn-success w-100">
+            Confirm Purchase
+        </button>
+    </form>
+</div>
+
+{% endblock %}

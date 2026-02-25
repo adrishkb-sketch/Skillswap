@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card shadow p-4">
+
+    <h2>{{ course.title }}</h2>
+    <p>{{ course.description }}</p>
+
+    <hr>
+
+    {% if course.video_path %}
+        <video width="100%" controls class="mb-3">
+            <source src="/{{ course.video_path }}" type="video/mp4">
+        </video>
+    {% endif %}
+    <hr>
+<h4>Reviews</h4>
+
+{% for review in course.review_set %}
+    <div class="card p-2 mb-2">
+        <p>⭐ {{ review.rating }}</p>
+        <p>{{ review.comment }}</p>
+    </div>
+{% endfor %}
+
+<hr>
+
+<form method="POST" action="/review/{{ course.id }}">
+    <input type="number" name="rating" min="1" max="5" class="form-control mb-2" required>
+    <textarea name="comment" class="form-control mb-2" placeholder="Leave a review"></textarea>
+    <button class="btn btn-primary">Submit Review</button>
+</form>
+    {% if course.document_path %}
+        <a href="/{{ course.document_path }}" class="btn btn-primary" download>
+            Download Course Document
+        </a>
+    <a href="/complete/{{ course.id }}" class="btn btn-success mt-3">
+    Mark as Completed
+</a>
+    {% endif %}
+
+</div>
+
+{% endblock %}
