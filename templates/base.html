@@ -14,34 +14,15 @@
 
 <body>
 
-<div class="d-flex">
+<div class="main-content p-5">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar p-4">
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+    {% endwith %}
 
-        <h3 class="fw-bold mb-4">SkillSwap</h3>
-
-        <a href="/dashboard">Dashboard</a>
-        <a href="/create-course">Create Course</a>
-        <a href="/buy-credits">Buy Credits</a>
-        <a href="/transactions">Transactions</a>
-        <a href="/leaderboard">Leaderboard</a>
-        <a href="/logout">Logout</a>
-
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="main-content p-5 w-100">
-
-        {% with messages = get_flashed_messages() %}
-            {% for message in messages %}
-                <div class="alert alert-info">{{ message }}</div>
-            {% endfor %}
-        {% endwith %}
-
-        {% block content %}{% endblock %}
-
-    </div>
+    {% block content %}{% endblock %}
 
 </div>
 

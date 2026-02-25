@@ -1,11 +1,28 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h2>Verify OTP</h2>
 
-<form method="POST">
-    <input type="text" name="otp" class="form-control mb-3" placeholder="Enter OTP" required>
-    <input type="hidden" name="password_hidden" value="{{ request.form.password }}">
-    <button type="submit" class="btn btn-success">Verify</button>
-</form>
+<div class="auth-wrapper">
+
+    <div class="auth-card">
+
+        <h2>Verify OTP</h2>
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <input type="text" name="otp"
+                       class="form-control"
+                       placeholder="Enter OTP" required>
+            </div>
+
+            <button class="auth-btn w-100">
+                Verify
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
 {% endblock %}
