@@ -102,7 +102,7 @@ def enroll_course(course_id):
 
     return redirect(url_for("dashboard.dashboard_home"))
 
-@courses_bp.route("/course/<int:course_id>")
+@courses_bp.route("/course/<int:course_id>", methods=["GET", "POST"])
 @login_required
 def view_course(course_id):
 
