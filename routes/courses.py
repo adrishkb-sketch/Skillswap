@@ -116,8 +116,16 @@ def view_course(course_id):
     if not enrollment and course.instructor_id != current_user.id:
         return redirect(url_for("dashboard.dashboard_home"))
 
-    return render_template("course_view.html", course=course)
+    # 🔥 FETCH SECTIONS PROPERLY
+    sections = CourseSection.query.filter_by(
+        course_id=course_id
+    ).order_by(CourseSection.order).all()
 
+    return render_template(
+        "course_view.html",
+        course=course,
+        sections=sections
+    )
 from models import Review
 
 @courses_bp.route("/review/<int:course_id>", methods=["POST"])
@@ -319,7 +327,13 @@ def complete_section(section_id):
     # Get section
     section = CourseSection.query.get_or_404(section_id)
     course_id = section.course_id
+    enrollment = Enrollment.query.filter_by(
+        student_id=current_user.id,
+        course_id=section.course_id
+    ).first()
 
+    if not enrollment:
+        return redirect("/dashboard")
     # Check if already completed
     existing = SectionCompletion.query.filter_by(
         student_id=current_user.id,
@@ -351,13 +365,13 @@ def complete_section(section_id):
     if total_sections > 0 and total_sections == completed_sections:
 
         existing_certificate = Certificate.query.filter_by(
-            student_id=current_user.id,
+            user_id=current_user.id,
             course_id=course_id
         ).first()
 
         if not existing_certificate:
             new_certificate = Certificate(
-                student_id=current_user.id,
+                user_id=current_user.id,
                 course_id=course_id
             )
             db.session.add(new_certificate)

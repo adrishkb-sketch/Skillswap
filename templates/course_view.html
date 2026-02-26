@@ -11,7 +11,7 @@
 
     {% if section.video_path %}
         <video controls class="w-100 mb-3">
-            <source src="/{{ section.video_path }}">
+            <source src="{{ url_for('static', filename=section.video_path) }}" type="video/mp4">
         </video>
     {% endif %}
 
