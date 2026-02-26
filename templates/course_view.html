@@ -1,45 +1,55 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<div class="card shadow p-4">
+<h3 class="mb-4">{{ course.title }}</h3>
 
-    <h2>{{ course.title }}</h2>
-    <p>{{ course.description }}</p>
+{% for section in sections %}
 
-    <hr>
+<div class="card p-4 mb-4">
 
-    {% if course.video_path %}
-        <video width="100%" controls class="mb-3">
-            <source src="/{{ course.video_path }}" type="video/mp4">
+    <h5>{{ section.order }}. {{ section.title }}</h5>
+
+    {% if section.video_path %}
+        <video controls class="w-100 mb-3">
+            <source src="/{{ section.video_path }}">
         </video>
     {% endif %}
-    <hr>
-<h4>Reviews</h4>
 
-{% for review in course.review_set %}
-    <div class="card p-2 mb-2">
-        <p>⭐ {{ review.rating }}</p>
-        <p>{{ review.comment }}</p>
-    </div>
-{% endfor %}
-
-<hr>
-
-<form method="POST" action="/review/{{ course.id }}">
-    <input type="number" name="rating" min="1" max="5" class="form-control mb-2" required>
-    <textarea name="comment" class="form-control mb-2" placeholder="Leave a review"></textarea>
-    <button class="btn btn-primary">Submit Review</button>
-</form>
-    {% if course.document_path %}
-        <a href="/{{ course.document_path }}" class="btn btn-primary" download>
-            Download Course Document
+    {% if section.document_path %}
+        <a href="/{{ section.document_path }}"
+           target="_blank"
+           class="btn btn-accent-outline mb-3">
+           View Document
         </a>
-    <a href="/complete/{{ course.id }}" class="btn btn-success mt-3">
-    Mark as Completed
-</a>
     {% endif %}
 
+    <!-- MCQs -->
+    {% for mcq in section.mcqs %}
+        <div class="mcq-box mb-3">
+            <p><strong>{{ mcq.question }}</strong></p>
+
+            <form method="POST"
+                  action="/mcq/{{ mcq.id }}/submit">
+
+                <input type="radio" name="answer" value="A"> {{ mcq.option_a }}<br>
+                <input type="radio" name="answer" value="B"> {{ mcq.option_b }}<br>
+                <input type="radio" name="answer" value="C"> {{ mcq.option_c }}<br>
+                <input type="radio" name="answer" value="D"> {{ mcq.option_d }}<br>
+
+                <button class="btn btn-sm btn-accent mt-2">
+                    Submit Answer
+                </button>
+            </form>
+        </div>
+    {% endfor %}
+
+    <a href="/section/{{ section.id }}/complete"
+       class="btn btn-success">
+        Mark Section Complete
+    </a>
+
 </div>
+
+{% endfor %}
 
 {% endblock %}

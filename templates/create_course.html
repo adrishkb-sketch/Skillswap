@@ -1,26 +1,69 @@
 {% extends "base.html" %}
-
 {% block content %}
-<div class="card p-4 shadow">
-    <h2>Create Course</h2>
 
-    <form method="POST" enctype="multipart/form-data">
+<div class="container py-5">
 
-        <input type="text" name="title" class="form-control mb-3" placeholder="Course Title" required>
+    <div class="form-wrapper mx-auto">
 
-        <textarea name="description" class="form-control mb-3" placeholder="Description"></textarea>
+        <div class="glass-card p-5">
 
-        <input type="text" name="tags" class="form-control mb-3" placeholder="Tags (e.g. Python, ML, Guitar)" required>
+            <div class="text-center mb-4">
+                <h3 class="fw-bold mb-2">Create a New Course</h3>
+                <p class="small text-muted">
+                    Turn your skills into structured knowledge.
+                </p>
+            </div>
 
-        <input type="number" name="duration" class="form-control mb-3" placeholder="Duration (in minutes)" required>
-        <input type="file" name="thumbnail" class="form-control mb-3">
-        <label>Upload Video</label>
-        <input type="file" name="video" class="form-control mb-3" required>
+            <form method="POST">
 
-        <label>Upload Document (Optional)</label>
-        <input type="file" name="document" class="form-control mb-3">
+                <div class="mb-4">
+                    <label class="form-label">Course Title</label>
+                    <input type="text"
+                           name="title"
+                           class="form-control"
+                           placeholder="Master Python From Scratch"
+                           required>
+                </div>
 
-        <button class="btn btn-primary w-100">Create Course</button>
-    </form>
+                <div class="mb-4">
+                    <label class="form-label">Course Description</label>
+                    <textarea name="description"
+                              class="form-control"
+                              placeholder="Explain what students will learn and why it matters."
+                              required></textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Tags</label>
+                    <input type="text"
+                           name="tags"
+                           class="form-control"
+                           placeholder="Python, Backend, Programming"
+                           required>
+                    <small class="text-muted">
+                        Helps learners discover your course.
+                    </small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Credits Required</label>
+                    <input type="number"
+                           name="credits_required"
+                           class="form-control"
+                           placeholder="50"
+                           required>
+                </div>
+
+                <button class="btn btn-accent w-100 py-2">
+                    Create & Start Building
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>
+
 {% endblock %}

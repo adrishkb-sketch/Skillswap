@@ -1,11 +1,28 @@
 from flask import Flask
 from config import Config
 from extensions import db, login_manager, mail, migrate
-import cloudinary
+
 
 def create_app():
+    import os
+
     app = Flask(__name__)
+
+    # 🔐 Load Config class (important)
     app.config.from_object(Config)
+
+    # 🔐 Ensure SECRET_KEY exists (fallback for safety)
+    app.config["SECRET_KEY"] = app.config.get(
+        "SECRET_KEY", "dev_secret_key_123"
+    )
+
+    # 🗄 Database
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///skillswap.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # 📂 Upload folder
+    app.config["UPLOAD_FOLDER"] = os.path.join("static", "uploads")
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
     # Initialize extensions
     db.init_app(app)
@@ -15,19 +32,6 @@ def create_app():
 
     login_manager.login_view = "auth.login"
 
-    # Configure Cloudinary
-    cloudinary.config(
-        cloud_name=app.config["CLOUDINARY_CLOUD_NAME"],
-        api_key=app.config["CLOUDINARY_API_KEY"],
-        api_secret=app.config["CLOUDINARY_API_SECRET"],
-        secure=True
-    )
-
-    # IMPORTANT FOR INDIA / AP REGION
-    cloudinary.config(api_base_url="https://api-ap.cloudinary.com")
-    print("Cloud Name:", app.config["CLOUDINARY_CLOUD_NAME"])
-    print("API Key:", app.config["CLOUDINARY_API_KEY"])
-    print("API Secret:", app.config["CLOUDINARY_API_SECRET"])
     # Register Blueprints
     from routes.auth import auth_bp
     from routes.profile import profile_bp

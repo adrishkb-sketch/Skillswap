@@ -102,3 +102,36 @@ class OTPVerification(db.Model):
 class PlatformWallet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     total_credits = db.Column(db.Integer, default=0)
+
+class CourseSection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    content_type = db.Column(db.String(20))
+    order = db.Column(db.Integer)
+
+    video_path = db.Column(db.String(300))
+    document_path = db.Column(db.String(300))
+
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+
+    # 🔥 ADD THIS
+    mcqs = db.relationship("MCQ", backref="section", cascade="all, delete", lazy=True)
+
+class MCQ(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(500))
+
+    option_a = db.Column(db.String(200))
+    option_b = db.Column(db.String(200))
+    option_c = db.Column(db.String(200))
+    option_d = db.Column(db.String(200))
+
+    correct_answer = db.Column(db.String(1))  # A, B, C, D
+
+    section_id = db.Column(db.Integer, db.ForeignKey('course_section.id'))
+
+class SectionCompletion(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    section_id = db.Column(db.Integer, db.ForeignKey('course_section.id'))
+    completed = db.Column(db.Boolean, default=False)

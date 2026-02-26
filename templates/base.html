@@ -25,6 +25,30 @@
     {% block content %}{% endblock %}
 
 </div>
+<script>
+function updateTheme() {
 
+    const body = document.body;
+    const bgColor = window.getComputedStyle(body).backgroundColor;
+
+    // Extract RGB values
+    const rgb = bgColor.match(/\d+/g);
+    if (!rgb) return;
+
+    const brightness =
+        (parseInt(rgb[0]) * 299 +
+         parseInt(rgb[1]) * 587 +
+         parseInt(rgb[2]) * 114) / 1000;
+
+    if (brightness < 120) {
+        body.classList.add("dark-mode");
+    } else {
+        body.classList.remove("dark-mode");
+    }
+}
+
+updateTheme();
+setInterval(updateTheme, 2000);
+</script>
 </body>
 </html>

@@ -1,3 +1,15 @@
+:root {
+    --text-primary: #111;
+    --text-secondary: #444;
+    --card-bg: rgba(255,255,255,0.08);
+}
+
+/* Dark theme fallback */
+body.dark-mode {
+    --text-primary: #ffffff;
+    --text-secondary: #cbd5e1;
+    --card-bg: rgba(255,255,255,0.05);
+}
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(-45deg, #1e1e2f, #2c2c54, #3c40c6, #575fcf);
@@ -110,4 +122,205 @@ body {
 .auth-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 0 25px rgba(0, 206, 201, 0.6);
+}
+.stat-card {
+    border-radius: 18px;
+}
+
+.profile-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.section-label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.skill-chip {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    background: linear-gradient(45deg,#6c5ce7,#00cec9);
+    margin: 4px;
+    display: inline-block;
+}
+
+.skill-chip.secondary {
+    background: rgba(255,255,255,0.1);
+}
+
+.btn-accent {
+    background: linear-gradient(45deg,#6c5ce7,#00cec9);
+    border: none;
+    color: white;
+}
+
+.btn-accent-outline {
+    border: 1px solid #6c5ce7;
+    color: white;
+    background: transparent;
+}
+
+.course-card {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.05);
+}
+
+.course-thumb {
+    width: 160px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.course-body {
+    flex: 1;
+}
+
+.simple-course {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.search-input {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: white;
+}
+.builder-card {
+    border-radius: 20px;
+}
+
+.content-card {
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05);
+}
+.builder-add-card,
+.builder-structure-card {
+    border-radius: 18px;
+}
+
+.builder-section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+}
+
+.builder-badge {
+    background: linear-gradient(45deg,#6c5ce7,#00cec9);
+}
+
+.quiz-form-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+}
+
+.mcq-preview {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+}
+/* ---------------- DYNAMIC TEXT FIX ---------------- */
+
+/* Override all common text colors */
+body,
+h1, h2, h3, h4, h5, h6,
+p, span, small,
+label,
+.form-label,
+.navbar,
+a {
+    color: var(--text-primary) !important;
+}
+
+/* Secondary text */
+.text-muted,
+.opacity-75 {
+    color: var(--text-secondary) !important;
+}
+
+/* Ensure links look good */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+.card,
+.form-control,
+input,
+textarea,
+select {
+    color: var(--text-primary) !important;
+}
+/* ================= GLASS FORM SYSTEM ================= */
+
+.form-control,
+textarea,
+select {
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+    font-size: 0.95rem !important;
+    color: var(--text-primary) !important;
+    transition: all 0.25s ease;
+}
+
+/* Remove ugly white background on focus */
+.form-control:focus,
+textarea:focus,
+select:focus {
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.4) !important;
+    border-color: rgba(0, 198, 255, 0.6) !important;
+    outline: none !important;
+}
+
+/* Placeholder styling */
+::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.7;
+}
+
+/* Reduce textarea height */
+textarea {
+    min-height: 90px !important;
+}
+
+/* Better labels */
+.form-label,
+label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+}
+.btn-primary,
+.btn-success,
+.btn-secondary,
+.btn-warning {
+    background: linear-gradient(45deg,#00c6ff,#0072ff) !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 8px 20px !important;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-secondary:hover,
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
 }
